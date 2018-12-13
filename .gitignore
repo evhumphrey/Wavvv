@@ -1,0 +1,4 @@
+/node_modules/
+*bundle.js*
+/sandbox/
+/src/core/README.md

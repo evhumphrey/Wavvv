@@ -1,18 +1,21 @@
-class _AudioContextSingleton {
-  static instance: _AudioContextSingleton;
+class _AudioContextSingleton extends AudioContext {
+  static instance: AudioContext;
+  static instanceCreated: boolean;
 
   constructor() {
-    if (!_AudioContextSingleton.instance) {
+    if (!_AudioContextSingleton.instanceCreated) {
+      super();
       return _AudioContextSingleton.getInstance();
     }
 
     return _AudioContextSingleton.instance;
   }
 
+
   static getInstance() {
     if (!this.instance) {
-      this.instance = true;
-      this.instance = new this();
+      this.instanceCreated = true; // prevent infinite loop
+      this.instance = new AudioContext();
       Object.freeze(this);
     }
     return this.instance;
